@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<title>OctoberTen Interiors</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Premium bedsheets, throw pillows and duvets. Order on WhatsApp, delivered nationwide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600&display=swap">
+<style>
+/* Layout: boutique catalogue — photo-led hero, category triptych from the flyer, filterable shop grid, cart drawer that hands the order to WhatsApp */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --sunk:#FBF7EE; --line:#EDE3CF;
+  --fg:#2B2416; --muted:#6E6452;
+  --teal:#9A7526; --teal-ink:#8A6820; --wine:#C9A24A; --wine-ink:#A5802E; --gold:#C9A24A;
+  --on-dark:#FFFFFF; --band:#8A6820; --band2:#C9A24A;
+  --shadow:0 18px 40px -24px rgba(138,104,32,.35);
+  --display:"Lora",Georgia,"Times New Roman",serif;
+  --body:"Source Sans 3","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --script:"Lora",Georgia,serif;
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.2;text-wrap:balance;margin:0}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.script{font-family:var(--script);font-style:italic;color:var(--wine-ink);font-weight:500}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:0;border-radius:999px;padding:.85rem 1.5rem;font-weight:500;letter-spacing:.04em;text-decoration:none;transition:transform .15s,background .2s}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--teal);color:var(--on-dark)}
+.btn-primary:hover{background:var(--band)}
+.btn-wine{background:var(--teal);color:var(--on-dark)}
+.btn-ghost{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1px var(--line)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1px var(--fg)}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.7rem}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:inherit}
+.logo svg{width:34px;height:auto;flex:none}
+.logo b{font-family:var(--display);font-weight:600;font-size:1.3rem;letter-spacing:0;line-height:1}
+.logo b .o{color:var(--teal-ink)} .logo b .t{color:var(--wine-ink)}
+.logo small{display:block;font-size:.6rem;letter-spacing:.42em;color:var(--muted);margin-top:3px}
+nav.links{display:flex;gap:1.6rem;font-size:.92rem}
+nav.links a{color:var(--fg);text-decoration:none;opacity:.8}
+nav.links a:hover{opacity:1;color:var(--wine-ink)}
+.cart-btn{position:relative;background:var(--teal);color:var(--on-dark);border:0;border-radius:999px;padding:.55rem 1rem;display:flex;align-items:center;gap:.45rem;font-size:.9rem;font-weight:500}
+.cart-btn svg{width:18px;height:18px}
+.count{background:#FFFFFF;color:var(--teal-ink);border-radius:999px;min-width:1.35rem;height:1.35rem;font-size:.75rem;display:grid;place-items:center;font-weight:600;padding:0 .3rem}
+.count.bump{animation:bump .4s}
+@keyframes bump{50%{transform:scale(1.35)}}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:999px;width:2.75rem;height:2.75rem;place-items:center}
+.menu-btn svg{width:20px;height:20px}
+.mnav{display:none}
+@media (max-width:760px){nav.links{display:none}.menu-btn{display:grid}
+ .mnav{display:flex;flex-direction:column;border-top:1px solid var(--line);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:.4rem .8rem}
+ .mnav[hidden]{display:none}
+ .mnav a{padding:.85rem 0;color:var(--fg);text-decoration:none;font-size:1.05rem;border-bottom:1px solid var(--line)}
+ .mnav a:last-child{border-bottom:0}
+ .top-right{display:flex;gap:.5rem;align-items:center}
+ .cart-btn{padding:.55rem .8rem}.cart-btn .lbl{display:none}
+ .logo b{font-size:1.15rem}}
+.top-right{display:flex;gap:.5rem;align-items:center}
+.mbar{display:none}
+
+/* hero */
+.hero{padding-block:clamp(2rem,5vw,4rem) clamp(2.5rem,6vw,5rem)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(1.5rem,4vw,4rem);align-items:center}
+.hero h1{font-size:clamp(2.2rem,5.2vw,3.9rem);letter-spacing:-.01em;color:var(--fg)}
+.hero h1 .script{display:block;margin-top:.1em}
+.hero .lede{font-size:1.1rem;color:var(--muted);max-width:34ch;margin-top:1.4rem}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.hero .ticks{display:flex;flex-wrap:wrap;gap:.4rem 1.3rem;margin-top:2rem;font-size:.85rem;color:var(--muted)}
+.hero .ticks span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:.5rem;vertical-align:middle}
+.hero-img{position:relative;min-width:0}
+.hero-img img{display:block;width:100%;aspect-ratio:4/4.6;object-fit:cover;border-radius:220px 220px 14px 14px;box-shadow:var(--shadow)}
+.hero-img .tag{position:absolute;left:-1rem;bottom:2rem;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;box-shadow:var(--shadow);font-size:.85rem;max-width:15rem}
+.hero-img .tag b{display:block;font-family:var(--display);font-size:1.05rem;font-weight:600}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr}.hero-img{order:-1}.hero-img img{aspect-ratio:5/4;border-radius:140px 140px 12px 12px}.hero-img .tag{left:.8rem;bottom:.8rem}}
+
+/* categories */
+section{padding-block:clamp(3rem,7vw,5.5rem)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+.sec-head h2{font-size:clamp(1.9rem,4vw,2.8rem);margin-top:.4rem}
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.cat{background:none;border:0;padding:0;text-align:center;display:flex;flex-direction:column;gap:.9rem}
+.cat .ph{overflow:hidden;border-radius:14px;aspect-ratio:1/1.05}
+.cat img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.cat:hover img{transform:scale(1.05)}
+.cat h3{font-size:1.65rem}
+.cat .sub{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.cat .rule{width:44px;height:2px;background:var(--gold);margin:0 auto}
+@media (max-width:640px){.cats{grid-template-columns:1fr 1fr 1fr;gap:.6rem}.cat h3{font-size:1.05rem}.cat .sub{display:none}}
+
+/* shop */
+#shop{background:var(--sunk)}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:.45rem 1rem;font-size:.88rem}
+.chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:var(--on-dark)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.4rem}
+.card{background:var(--surface);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
+.card .ph{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--sunk);border:0;padding:0;display:block;width:100%}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.card:hover .ph img{transform:scale(1.04)}
+.badge{position:absolute;top:.8rem;left:.8rem;background:#FFFFFF;color:var(--teal-ink);border:1px solid var(--gold);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .65rem;border-radius:999px}
+.card .body{padding:1.1rem 1.2rem 1.25rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.card .kind{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.card h3{font-size:1.2rem}
+.swatches{display:flex;gap:.35rem}
+.sw{width:16px;height:16px;border-radius:50%;border:1px solid var(--line)}
+.card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:.6rem;gap:.5rem}
+.price{font-family:var(--display);font-size:1.2rem;font-weight:600;font-variant-numeric:tabular-nums}
+.price small{font-family:var(--body);font-size:.75rem;color:var(--muted);font-weight:400;margin-right:.25rem}
+.add{border:0;background:var(--teal);color:var(--on-dark);border-radius:999px;padding:.5rem 1rem;font-size:.85rem;font-weight:500}
+.add:hover{background:var(--band)}
+.note{font-size:.82rem;color:var(--muted);margin-top:1.6rem}
+
+/* values */
+.values{display:grid;grid-template-columns:repeat(4,1fr)}
+.val{text-align:center;padding:.5rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.val+.val{border-left:1px solid var(--line)}
+.val .ic{width:62px;height:62px;border-radius:50%;border:1.5px solid var(--teal-ink);display:grid;place-items:center;color:var(--teal-ink)}
+.val .ic svg{width:28px;height:28px}
+.val b{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+.val p{font-size:.88rem;color:var(--muted);max-width:22ch}
+@media (max-width:760px){.values{grid-template-columns:1fr 1fr;row-gap:2rem}.val:nth-child(3){border-left:0}}
+
+/* how */
+.how{background:var(--surface);border-block:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;counter-reset:s}
+.step{counter-increment:s;display:flex;flex-direction:column;gap:.5rem}
+.step::before{content:counter(s);font-family:var(--display);font-size:2.6rem;color:var(--gold);line-height:1}
+.step h3{font-size:1.3rem}
+.step p{color:var(--muted);font-size:.95rem}
+@media (max-width:760px){.steps{grid-template-columns:1fr;gap:1.5rem}}
+
+/* band */
+.band{background:linear-gradient(115deg,var(--band) 0%,var(--teal) 50%,var(--band2) 100%);color:var(--on-dark);position:relative}
+.band::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,transparent,#FFFFFF,transparent)}
+.band .wrap{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.band h2{font-size:clamp(1.8rem,3.5vw,2.6rem)}
+.band .script{color:#FFF3D6}
+.band p{opacity:.85;margin-top:.8rem;max-width:42ch}
+.phone{font-family:var(--body);font-weight:600;font-size:clamp(1.8rem,4.5vw,2.8rem);letter-spacing:.02em;font-variant-numeric:tabular-nums;user-select:all}
+.band .row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+.band .btn-ghost{color:var(--on-dark);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+.band .btn-light{background:#FFFFFF;color:var(--teal-ink)}
+@media (max-width:760px){.band{background:var(--band)}.band .wrap{grid-template-columns:1fr}}
+
+footer{padding-block:2.5rem;font-size:.85rem;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+/* modal + drawer */
+.scrim{position:fixed;inset:0;background:rgba(43,36,22,.5);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg);z-index:50;transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px)}
+.drawer.on{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.3rem;border-bottom:1px solid var(--line)}
+.dh h2{font-size:1.5rem}
+.x{background:none;border:0;width:2.2rem;height:2.2rem;border-radius:50%;font-size:1.4rem;line-height:1}
+.x:hover{background:var(--sunk)}
+.db{flex:1;overflow:auto;padding:1rem 1.3rem;display:flex;flex-direction:column;gap:1rem}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:.8rem;align-items:center}
+.line img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+.line .nm{font-weight:500;line-height:1.3}
+.line .opt{font-size:.8rem;color:var(--muted)}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;margin-top:.3rem}
+.qty button{background:none;border:0;width:1.9rem;height:1.9rem}
+.qty span{min-width:1.4rem;text-align:center;font-variant-numeric:tabular-nums;font-size:.9rem}
+.line .lp{text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+.rm{background:none;border:0;color:var(--muted);font-size:.75rem;text-decoration:underline;padding:0}
+.empty{text-align:center;color:var(--muted);padding:2.5rem 1rem;display:flex;flex-direction:column;gap:1rem;align-items:center}
+.df{border-top:1px solid var(--line);padding:1rem 1.3rem 1.3rem;display:flex;flex-direction:column;gap:.8rem;background:var(--surface)}
+.tot{display:flex;justify-content:space-between;font-size:1.05rem}
+.tot b{font-family:var(--display);font-size:1.35rem;font-variant-numeric:tabular-nums}
+.small{font-size:.8rem;color:var(--muted)}
+form.co{display:grid;gap:.7rem}
+label{font-size:.8rem;font-weight:500;display:grid;gap:.25rem}
+input,select,textarea{font:inherit;font-size:.95rem;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:.6rem .75rem;width:100%}
+textarea{resize:vertical;min-height:3.2rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.err{color:var(--wine-ink);font-size:.8rem}
+
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-46%);width:min(860px,calc(100% - 32px));max-height:calc(100% - 48px);overflow:auto;background:var(--bg);border-radius:16px;z-index:50;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;display:grid;grid-template-columns:1fr 1fr}
+.modal.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.modal .mimg{min-width:0;position:relative;background:var(--sunk)}
+.thumbs{position:absolute;left:.8rem;bottom:.8rem;display:flex;gap:.4rem}
+.th{width:52px;height:52px;padding:0;border:2px solid #FFFFFF;border-radius:8px;overflow:hidden;background:#FFFFFF;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.th[aria-pressed="true"]{border-color:var(--gold)}
+.th img{width:100%;height:100%;object-fit:cover}
+.modal .mimg img{width:100%;height:100%;object-fit:cover;min-height:280px;display:block}
+.modal .mb{padding:1.6rem;display:flex;flex-direction:column;gap:1rem;position:relative;min-width:0}
+.modal .x{position:absolute;top:.7rem;right:.7rem}
+.modal h3{font-size:1.9rem;padding-right:2rem}
+.modal .desc{color:var(--muted);font-size:.95rem}
+.opts{display:flex;flex-wrap:wrap;gap:.45rem}
+.opt{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:.45rem .8rem;font-size:.85rem;display:flex;align-items:center;gap:.45rem}
+.opt[aria-pressed="true"]{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
+.ol{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.mrow{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+.mrow .btn{flex:1}
+@media (max-width:640px){.modal{grid-template-columns:1fr;top:auto;bottom:0;left:0;right:0;transform:translateY(20px);width:100%;max-height:92%;border-radius:18px 18px 0 0;padding-bottom:env(safe-area-inset-bottom,0px)}.modal.on{transform:none}.modal .mimg img{min-height:0;aspect-ratio:16/10;height:auto}}
+
+.toast{position:fixed;left:50%;bottom:calc(1.2rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,150%);background:var(--fg);color:var(--bg);padding:.7rem 1.2rem;border-radius:999px;font-size:.9rem;z-index:60;transition:transform .3s;white-space:nowrap;max-width:calc(100% - 32px);overflow:hidden;text-overflow:ellipsis}
+.toast.on{transform:translate(-50%,0)}
+.sent{background:var(--sunk);border-radius:10px;padding:1rem;font-size:.85rem;white-space:pre-wrap;word-break:break-word;max-height:220px;overflow:auto;border:1px solid var(--line)}
+.wa-fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:36;display:flex;align-items:center;gap:.5rem;background:#25D366;color:#FFFFFF;text-decoration:none;border-radius:999px;padding:.8rem;box-shadow:0 10px 24px -8px rgba(18,140,74,.6);transition:transform .2s,bottom .25s}
+.wa-fab:hover{transform:translateY(-2px)}
+.wa-fab svg{width:28px;height:28px;flex:none}
+.wa-fab span{font-weight:600;font-size:.9rem;padding-right:.4rem}
+.wa-fab::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 0 rgba(37,211,102,.55);animation:waPulse 2.6s infinite}
+@keyframes waPulse{70%{box-shadow:0 0 0 14px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+@media (max-width:640px){.wa-fab span{display:none}body.has-bar .wa-fab{bottom:calc(5.4rem + env(safe-area-inset-bottom,0px))}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+@media (max-width:640px){
+ .grid{grid-template-columns:1fr 1fr;gap:.75rem}
+ .card .body{padding:.75rem .8rem .9rem;gap:.35rem}
+ .card h3{font-size:1rem}
+ .card .kind{font-size:.62rem;letter-spacing:.14em}
+ .card .foot{flex-direction:column;align-items:stretch}
+ .add{padding:.6rem .6rem;width:100%}
+ .price{font-size:1.05rem}
+ .chips{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:.3rem;scrollbar-width:none}
+ .chip{flex:none;padding:.55rem 1rem}
+ .hero .ctas .btn{flex:1 1 100%}
+ .opt{min-height:44px}
+ .qty button{width:2.5rem;height:2.5rem}
+ .mbar{position:fixed;left:0;right:0;bottom:0;z-index:35;display:flex;align-items:center;justify-content:space-between;gap:1rem;background:#FFFFFF;border-top:1px solid var(--line);box-shadow:0 -10px 30px -20px rgba(138,104,32,.5);padding-top:.7rem;padding-bottom:calc(.7rem + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+ .mbar[hidden]{display:none}
+ .mbar b{font-family:var(--display);font-size:1.15rem;font-variant-numeric:tabular-nums}
+ .mbar .small{display:block}
+ body.has-bar footer{padding-bottom:6rem}
+ .toast{bottom:calc(5.5rem + env(safe-area-inset-bottom,0px))}
+}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#home" aria-label="OctoberTen Interiors home">
+      <svg viewBox="0 0 60 40" aria-hidden="true"><path d="M4 24 L30 6 L56 24" fill="none" stroke="var(--wine-ink)" stroke-width="3.2" stroke-linecap="round"/><g fill="var(--teal-ink)"><rect x="26" y="16" width="3.4" height="3.4"/><rect x="30.6" y="16" width="3.4" height="3.4"/><rect x="26" y="20.6" width="3.4" height="3.4"/><rect x="30.6" y="20.6" width="3.4" height="3.4"/></g><path d="M10 34 Q30 26 52 30" fill="none" stroke="var(--wine-ink)" stroke-width="1.6"/></svg>
+      <span><b><span class="o">October</span><span class="t">Ten</span></b><small>INTERIORS</small></span>
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="#shop">Shop</a><a href="#collections">Collections</a><a href="#how">How to order</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="top-right">
+    <button class="cart-btn" id="openCart" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="lbl">Cart</span> <span class="count" id="count">0</span>
+    </button>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="Mobile" hidden>
+    <a href="#shop">Shop</a><a href="#collections">Collections</a><a href="#how">How to order</a><a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="home">
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Beautiful Bedding · Better Living</p>
+      <h1 style="margin-top:1rem">Premium beddings for your comfort, <span class="script">style and joy.</span></h1>
+      <p class="lede">Soft bedsheets, plush throw pillows and cloud-like duvets in a wide range of colours, from soft blush and sage to rich navy and gold. Order on WhatsApp and we deliver anywhere in Nigeria.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#shop">Shop the collection</a>
+        <a class="btn btn-ghost" href="https://wa.me/2347032209286" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </div>
+      <div class="ticks"><span>Nationwide delivery</span><span>Premium fabrics</span><span>All bed sizes</span></div>
+    </div>
+    <div class="hero-img">
+      <img id="heroImg" alt="Bed made up with a charcoal quilted comforter and grey pillowcases">
+      <div class="tag"><b>Quilted Comforter Set</b>Thick, soft and made for everyday comfort.</div>
+    </div>
+  </div>
+</div>
+
+<section id="collections" style="padding-top:0">
+  <div class="wrap">
+    <div class="cats" id="cats"></div>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">The shop</p><h2>Dress your bed</h2></div>
+      <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="note">Bed sizes are in feet (width × length), as sold in Nigeria. Send your order on WhatsApp and we'll reply with prices and the delivery fee for your state.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="values">
+      <div class="val"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div><b>Quality products</b><p>Every piece is checked before it leaves us.</p></div>
+      <div class="val"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4C10 4 5 9 5 17v3"/><path d="M20 4c0 9-5 13-13 13"/><path d="M9 13l4-4"/></svg></div><b>Premium fabrics</b><p>Breathable cotton, plush faux fur and soft hollow-fibre fill.</p></div>
+      <div class="val"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></div><b>Beautiful spaces</b><p>Colours chosen to layer into a calm bedroom.</p></div>
+      <div class="val"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div><b>Your comfort matters</b><p>Not sure on size? Ask us before you order.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">How to order</p><h2>Three steps to a better bed</h2></div></div>
+    <div class="steps">
+      <div class="step"><h3>Pick your pieces</h3><p>Choose the size and colour for each item and add it to your cart.</p></div>
+      <div class="step"><h3>Send it on WhatsApp</h3><p>Fill in your delivery details. Your full order is written into a WhatsApp message to 0703 220 9286.</p></div>
+      <div class="step"><h3>Confirm, pay, relax</h3><p>We reply with prices, stock and delivery fee, you pay, and your order ships to your door anywhere in Nigeria.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Talk to us. <span class="script">We're happy to help.</span></h2>
+      <p>Questions about sizes, colours or bulk orders for hotels and short-lets? Call or send a WhatsApp message.</p>
+    </div>
+    <div>
+      <p class="eyebrow" style="color:inherit;opacity:.75">Call / WhatsApp</p>
+      <div class="phone" id="phoneNum">0703 220 9286</div>
+      <div class="row">
+        <a class="btn btn-light" href="https://wa.me/2347032209286" target="_blank" rel="noopener">Open WhatsApp</a>
+        <button class="btn btn-ghost" id="copyPhone" type="button">Copy number</button>
+      </div>
+      <p style="margin-top:1.2rem;font-size:.9rem">Delivery <b>nationwide</b>, all 36 states and the FCT.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 OctoberTen Interiors. Beautiful Bedding · Better Living.</span>
+    <span>Prices on request via WhatsApp.</span>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="mimg"><img id="mImg" alt=""><div class="thumbs" id="mThumbs" hidden></div></div>
+  <div class="mb">
+    <button class="x" data-close aria-label="Close">×</button>
+    <p class="eyebrow" id="mKind"></p>
+    <h3 id="mTitle"></h3>
+    <p class="desc" id="mDesc"></p>
+    <div id="mSizes"></div>
+    <div id="mColors"></div>
+    <p class="small">Price on request. We confirm it on WhatsApp with your delivery fee.</p>
+    <div class="mrow">
+      <div class="qty"><button type="button" id="mMinus" aria-label="Decrease">−</button><span id="mQty">1</span><button type="button" id="mPlus" aria-label="Increase">+</button></div>
+      <button class="btn btn-primary" id="mAdd" type="button">Add to cart</button>
+    </div>
+  </div>
+</div>
+
+<aside class="drawer" id="drawer" aria-label="Cart" aria-hidden="true">
+  <div class="dh"><h2 id="dTitle">Your cart</h2><button class="x" data-close aria-label="Close cart">×</button></div>
+  <div class="db" id="dBody"></div>
+  <div class="df" id="dFoot"></div>
+</aside>
+
+<div class="mbar" id="mbar" hidden><div><span class="small">Your cart</span><b id="mbarCount">0 items</b></div><button class="btn btn-primary" id="mbarBtn" type="button">View cart</button></div>
+
+<a class="wa-fab" id="waFab" href="https://wa.me/2347032209286?text=Hello%20OctoberTen%20Interiors%2C%20I%27d%20like%20to%20make%20an%20enquiry." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp, 0703 220 9286">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#FFFFFF" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 6.9L3.2 29l6.5-1.7c1.9 1 4.1 1.6 6.3 1.6 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.5c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.8 1 1-3.7-.3-.4c-1.1-1.7-1.7-3.7-1.7-5.8C5.2 9.9 10 5.3 16 5.3s10.8 4.6 10.8 10.4S22 26.5 16 26.5zm5.9-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1c-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2s0-.5.1-.6l.5-.6c.2-.2.2-.4.3-.6s0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.1-1.2 2.7 1.2 3.2 1.4 3.4 2.4 3.6 5.7 5c.8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5s.3-1.3.2-1.5-.3-.2-.6-.4z"/></svg>
+  <span>Chat with us</span>
+</a>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const IMG = {"fluffy": "images/fluffy.jpg", "floralbag": "images/floralbag.jpg", "plum": "images/plum.jpg", "bluestack": "images/bluestack.jpg", "geo": "images/geo.jpg", "ribbed": "images/ribbed.jpg", "greybed": "images/greybed.jpg", "yellow": "images/yellow.jpg", "duvetstack": "images/duvetstack.jpg", "whitesheets": "images/whitesheets.jpg", "rolled": "images/rolled.jpg", "gingham": "images/gingham.jpg", "bluesheets2": "images/bluesheets2.jpg", "pastel": "images/pastel.jpg", "tassel": "images/tassel.jpg", "butterfly": "images/butterfly.jpg", "diamond": "images/diamond.jpg", "blueblock": "images/blueblock.jpg", "woven": "images/woven.jpg", "fitted": "images/fitted.jpg", "stripe": "images/stripe.jpg", "solid": "images/solid.jpg"};
+const WA = "2347032209286";
+const COLORS = {"Pure White":"#FFFFFF","Sky Blue":"#8DB4E8","Cream White":"#F3EEE3","Gingham Blue":"#7C93B8","Gingham Pink":"#EBB9C2","Gingham Mustard":"#E2A945","Gingham Sage":"#B7C6B2","Chocolate":"#6B4428","Camel":"#D7B68C","Cream":"#F2EBDD","Lilac":"#A77BE0","Black":"#1E1E1E","Turquoise":"#3BB3E0","Wine Red":"#8E1420","Candy Pink":"#EE7DB0","Silver Grey":"#C9C8CF","Green Floral":"linear-gradient(135deg,#FFFFFF 0 35%,#8CC66B 35% 60%,#2FA58C 60% 80%,#6E1E3A 80%)","Dusty Blue":"#7E9DC3","Mustard":"#D9A44E","Blush Pink":"#E6C3CC","Butter Cream":"#F6EBC6","Denim Blue":"#5F7FA8","Charcoal Grey":"#5E6064","Plum & Grey":"linear-gradient(135deg,#7B2B6E 50%,#7A7A7E 50%)","Yellow & Grey":"linear-gradient(135deg,#F2C230 50%,#6E7076 50%)","Triangle Print":"conic-gradient(#FFFFFF 0 50%,#F2C230 0 70%,#7A7D82 0)","Dusty Pink":"#D9A0A6","Butter Yellow":"#F3E6B5","Teal Green":"#3F6E66","Dove Grey":"#B9B8BE","Sand Beige":"#D8BE8C","Ivory":"#F4F0E6","Marigold":"#F0A623","Aqua":"#79C3C6","Pink Butterfly":"linear-gradient(135deg,#E6B4D8 50%,#C2187E 50%)","Forest Green":"#3F6B5E","Taupe":"#B8ADA8","Emerald":"#1E5A4E","Steel Blue":"#5D8BA0","Mustard Yellow":"#E9B820","Blue Block Print":"linear-gradient(135deg,#FFFFFF 0 35%,#8DB4E8 35% 65%,#8E8E92 65%)","Burnt Orange":"#C2471B","Olive Gold":"#A79323","Brick Red":"#A73A3E","Charcoal":"#4A4850","Navy":"#1F2E58","Wine":"#7D1328","Oatmeal":"#D8D1C4","Bronze":"#A97C45","Baby Blue":"#B9D2EC","Rose Pink":"#E7A9AE","Beige":"#E6D9C6","Terracotta":"#C4643E","Navy Blue":"#233D78","Stripe Grey":"#77787C","Dusty Rose":"#C99D97","Stripe Ivory":"#EFE9D6","Burgundy":"#7E1222","Orange":"#F57C1F","Royal Blue":"#1F6FD6","Lemon Yellow":"#F7CB16","Kelly Green":"#1E9A4A","Red":"#E32B2B","Purple":"#8A3FC9","Hot Pink":"#E8338A","Lime Green":"#9BD03A","White":"#FFFFFF","Soft Pink":"#F3A2BF","Nude":"#E8D8CC"};
+const BED = ["3½ × 6 ft","4½ × 6 ft","6 × 6 ft","7 × 7 ft"];
+const CATS = [
+  {id:"sheets",name:"Bedsheets",sub:"Soft | Durable | Luxurious",img:"gingham"},
+  {id:"pillows",name:"Throw Pillows",sub:"Add comfort | Elevate style",img:"ribbed"},
+  {id:"duvets",name:"Duvets",sub:"Warmth | Coziness | Luxury",img:"duvetstack"}
+];
+const PRODUCTS = [
+  {id:"comforter",cat:"duvets",kind:"Duvets",name:"Quilted Comforter Set",imgs:["greybed"],badge:"Bestseller",
+   desc:"Box-quilted comforter with matching pillowcases. Thick, even fill that keeps its shape wash after wash.",
+   sizes:BED.slice(1),colors:["Charcoal Grey"]},
+  {id:"plain",cat:"sheets",kind:"Bedsheets",name:"Classic Bedsheet Set",imgs:["bluestack","bluesheets2"],
+   desc:"Fitted sheet, flat sheet and pillowcases in smooth, breathable fabric with a clean hem.",
+   sizes:BED,colors:["Sky Blue"]},
+  {id:"hotel",cat:"sheets",kind:"Bedsheets",name:"Hotel White Bedsheet Set",imgs:["whitesheets"],badge:"Hotel quality",
+   desc:"Crisp all-white sheets for a fresh, hotel-style bed. A favourite for homes, short-lets and guest rooms.",
+   sizes:BED,colors:["Pure White"]},
+  {id:"gingham",cat:"sheets",kind:"Bedsheets",name:"Gingham Check Bedsheet",imgs:["gingham"],badge:"New",
+   desc:"Soft washed cotton in a classic check. Mix the colours for a relaxed, layered look.",
+   sizes:BED,colors:["Gingham Blue","Gingham Pink","Gingham Mustard","Gingham Sage"]},
+  {id:"pastel",cat:"sheets",kind:"Bedsheets",name:"Pastel Flat Sheet",imgs:["pastel"],
+   desc:"Smooth, soft flat sheet in gentle pastel shades. Easy to mix and match with your duvet and pillowcases.",
+   sizes:BED,colors:["Dusty Pink","Butter Yellow","Teal Green","Dove Grey","Denim Blue"]},
+  {id:"fitted",cat:"sheets",kind:"Bedsheets",name:"Elastic Fitted Sheet",imgs:["fitted"],
+   desc:"Fully elasticated corners that grip the mattress and stay put all night. No more untucking.",
+   sizes:BED,colors:["Baby Blue","Rose Pink","Beige","Terracotta","Navy Blue"]},
+  {id:"stripe",cat:"sheets",kind:"Bedsheets",name:"Stripe Sateen Bedsheet Set",imgs:["stripe"],badge:"Premium",
+   desc:"Tone-on-tone sateen stripe with a subtle sheen. Fitted sheet, flat sheet and pillowcases for a hotel-style finish.",
+   sizes:BED,colors:["Stripe Grey","Dusty Rose","Stripe Ivory","Burgundy"]},
+  {id:"blueblock",cat:"sheets",kind:"Bedsheets",name:"Blue Block Print Bedsheet Set",imgs:["blueblock"],
+   desc:"Modern colour-block print paired with plain blue pillowcases. Clean and fresh for any bedroom.",
+   sizes:BED,colors:["Blue Block Print"]},
+  {id:"butterfly",cat:"sheets",kind:"Bedsheets",name:"Butterfly Print Bedsheet Set",imgs:["butterfly"],
+   desc:"Playful butterfly print with plain magenta pillowcases. A favourite for girls' rooms.",
+   sizes:BED.slice(0,3),colors:["Pink Butterfly"]},
+  {id:"solid",cat:"pillows",kind:"Throw pillows",name:"Solid Colour Throw Pillow",imgs:["solid"],badge:"Many colours",
+   desc:"Bright, plain throw pillow with a soft fibre insert. Pick one colour or mix several for a cheerful sofa.",
+   sizes:["40 × 40 cm","45 × 45 cm"],colors:["Black","Orange","Royal Blue","Purple","Lemon Yellow","Kelly Green","Hot Pink","Navy","Red","Lime Green","White","Soft Pink","Nude"]},
+  {id:"diamond",cat:"pillows",kind:"Throw pillows",name:"Diamond-Stitch Velvet Pillow",imgs:["diamond"],
+   desc:"Soft velvet with raised diamond piping and a neat corded edge. Adds a rich, tailored touch.",
+   sizes:["45 × 45 cm","50 × 50 cm"],colors:["Forest Green","Taupe","Emerald","Steel Blue","Mustard Yellow"]},
+  {id:"tassel",cat:"pillows",kind:"Throw pillows",name:"Velvet Tassel Pillow",imgs:["tassel"],
+   desc:"Velvet cover trimmed with matching cotton tassels. Soft, playful and full of texture.",
+   sizes:["45 × 45 cm"],colors:["Sand Beige","Ivory","Marigold","Aqua"]},
+  {id:"woven",cat:"pillows",kind:"Throw pillows",name:"Textured Woven Pillow",imgs:["woven"],
+   desc:"Heavy woven and velvet fabrics in warm, earthy tones. Great for layering on sofas and accent chairs.",
+   sizes:["45 × 45 cm","50 × 50 cm"],colors:["Burnt Orange","Olive Gold","Brick Red","Charcoal","Navy","Wine","Oatmeal","Bronze"]},
+  {id:"fluffy",cat:"pillows",kind:"Throw pillows",name:"Fluffy Faux-Fur Pillow",imgs:["fluffy"],
+   desc:"Long-pile shaggy cover over a full insert. Soft to touch and available in a wide range of colours.",
+   sizes:["45 × 45 cm"],colors:["Chocolate","Camel","Cream","Lilac","Black","Turquoise","Wine Red","Candy Pink","Silver Grey"]},
+  {id:"ribbed",cat:"pillows",kind:"Throw pillows",name:"Ribbed Plush Pillow",imgs:["ribbed"],
+   desc:"Channel-ribbed plush cover with a cosy, textured finish. Looks just as good on the sofa as on the bed.",
+   sizes:["45 × 45 cm","50 × 50 cm"],colors:["Cream White"]},
+  {id:"light",cat:"duvets",kind:"Duvets",name:"Lightweight Duvet",imgs:["duvetstack"],
+   desc:"Soft, light duvet with stitched channels that keep the fill in place. Comfortable for warm Nigerian nights.",
+   sizes:BED,colors:["Dusty Blue","Mustard","Blush Pink","Pure White"]},
+  {id:"rolled",cat:"duvets",kind:"Duvets",name:"Cloud Puff Duvet",imgs:["rolled"],
+   desc:"Extra-thick, puffy duvet for a plush, cloud-like bed. Rolls up neatly for storage.",
+   sizes:BED.slice(1),colors:["Butter Cream","Denim Blue"]},
+  {id:"floral",cat:"duvets",kind:"Duvets",name:"Floral Duvet with Carry Bag",imgs:["floralbag"],
+   desc:"Printed floral duvet delivered in a zip-up clear carry bag that keeps it clean and makes it easy to store.",
+   sizes:BED,colors:["Green Floral"]},
+  {id:"plum",cat:"sets",kind:"Bed sets",name:"Two-Tone Duvet Cover Set",imgs:["plum"],
+   desc:"Reversible duvet cover with matching pillowcases in two solid shades. Flip it to change the look.",
+   sizes:BED.slice(1),colors:["Plum & Grey"]},
+  {id:"yellow",cat:"sets",kind:"Bed sets",name:"Reversible Duvet Cover Set",imgs:["yellow"],
+   desc:"Bright yellow on one side, soft grey on the other, with matching pillowcases and fitted sheet.",
+   sizes:BED.slice(1),colors:["Yellow & Grey"]},
+  {id:"geo",cat:"sets",kind:"Bed sets",name:"Geometric Print Bed Set",imgs:["geo"],
+   desc:"Duvet cover with a modern triangle print, solid grey reverse and fitted sheet, plus printed pillowcases.",
+   sizes:BED.slice(1),colors:["Triangle Print"]}
+];
+
+const $ = s => document.querySelector(s);
+const naira = n => "₦" + n.toLocaleString("en-NG");
+const store = {get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let cart = store.get("ot_cart",[]).filter(l=>PRODUCTS.some(p=>p.id===l.id));
+let filter = "all";
+
+$("#heroImg").src = IMG.greybed;
+
+// categories
+$("#cats").innerHTML = CATS.map(c=>`<button class="cat" data-cat="${c.id}"><div class="ph"><img src="${IMG[c.img]}" alt="${c.name}" decoding="async"></div><h3>${c.name}</h3><span class="sub">${c.sub}</span><span class="rule"></span></button>`).join("");
+$("#cats").addEventListener("click",e=>{const b=e.target.closest(".cat");if(!b)return;setFilter(b.dataset.cat);$("#shop").scrollIntoView({behavior:"smooth"})});
+
+// chips
+const CHIPS=[["all","All"],["sheets","Bedsheets"],["pillows","Throw pillows"],["duvets","Duvets"],["sets","Bed sets"]];
+function renderChips(){$("#chips").innerHTML=CHIPS.map(([id,l])=>`<button class="chip" data-f="${id}" aria-pressed="${filter===id}">${l}</button>`).join("")}
+$("#chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(b)setFilter(b.dataset.f)});
+function setFilter(f){filter=f;renderChips();renderGrid()}
+
+function swatch(c){return `<span class="sw" style="background:${COLORS[c]}" title="${c}"></span>`}
+function renderGrid(){
+  const list=PRODUCTS.filter(p=>filter==="all"||p.cat===filter);
+  $("#grid").innerHTML=list.map(p=>`<article class="card">
+    <button class="ph" data-open="${p.id}" aria-label="View ${p.name}"><img src="${IMG[p.imgs[0]]}" alt="${p.name}" loading="lazy" decoding="async">${p.badge?`<span class="badge">${p.badge}</span>`:""}</button>
+    <div class="body"><span class="kind">${p.kind}</span><h3>${p.name}</h3>
+    <div class="swatches">${p.colors.map(swatch).join("")}</div>
+    <div class="foot"><span class="small">${p.sizes.length>1?p.sizes.length+" sizes":p.sizes[0]}</span><button class="add" data-open="${p.id}">Choose options</button></div></div></article>`).join("");
+}
+$("#grid").addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(b)openProduct(b.dataset.open)});
+
+// product modal
+let cur=null,sel={};
+function openProduct(id){
+  cur=PRODUCTS.find(p=>p.id===id); sel={size:0,color:0,qty:1};
+  $("#mImg").src=IMG[cur.imgs[0]]; $("#mImg").alt=cur.name;
+  $("#mThumbs").hidden=cur.imgs.length<2; $("#mThumbs").innerHTML=cur.imgs.map((k,i)=>`<button type="button" class="th" data-th="${k}" aria-pressed="${i===0}" aria-label="Photo ${i+1}"><img src="${IMG[k]}" alt=""></button>`).join("");
+  $("#mKind").textContent=cur.kind; $("#mTitle").textContent=cur.name; $("#mDesc").textContent=cur.desc;
+  renderOpts(); show("#modal");
+}
+function renderOpts(){
+  $("#mSizes").innerHTML=`<div class="ol">Size</div><div class="opts">${cur.sizes.map((s,i)=>`<button type="button" class="opt" data-size="${i}" aria-pressed="${sel.size===i}">${s}</button>`).join("")}</div>`;
+  $("#mColors").innerHTML=`<div class="ol">Colour · ${cur.colors[sel.color]}</div><div class="opts">${cur.colors.map((c,i)=>`<button type="button" class="opt" data-color="${i}" aria-pressed="${sel.color===i}">${swatch(c)}${c}</button>`).join("")}</div>`;
+  $("#mQty").textContent=sel.qty;
+}
+$("#modal").addEventListener("click",e=>{
+  const s=e.target.closest("[data-size]"),c=e.target.closest("[data-color]");
+  const th=e.target.closest("[data-th]");if(th){$("#mImg").src=IMG[th.dataset.th];document.querySelectorAll(".th").forEach(b=>b.setAttribute("aria-pressed",String(b===th)))}
+  if(s){sel.size=+s.dataset.size;renderOpts()} if(c){sel.color=+c.dataset.color;renderOpts()}
+});
+$("#mMinus").onclick=()=>{sel.qty=Math.max(1,sel.qty-1);renderOpts()};
+$("#mPlus").onclick=()=>{sel.qty=Math.min(20,sel.qty+1);renderOpts()};
+$("#mAdd").onclick=()=>{
+  const key=`${cur.id}|${sel.size}|${sel.color}`, ex=cart.find(l=>l.key===key);
+  if(ex) ex.qty+=sel.qty; else cart.push({key,id:cur.id,size:sel.size,color:sel.color,qty:sel.qty});
+  saveCart(); hideAll(); toast(`Added ${cur.name} to your cart`);
+  const c=$("#count");c.classList.remove("bump");void c.offsetWidth;c.classList.add("bump");
+};
+
+// cart
+function lineInfo(l){const p=PRODUCTS.find(x=>x.id===l.id);return {p,size:p.sizes[l.size],color:p.colors[l.color],unit:p.prices[l.size],total:p.prices[l.size]*l.qty}}
+function subtotal(){return cart.reduce((s,l)=>s+lineInfo(l).total,0)}
+function saveCart(){store.set("ot_cart",cart);const n=cart.reduce((s,l)=>s+l.qty,0);$("#count").textContent=n;$("#mbar").hidden=!n;document.body.classList.toggle("has-bar",!!n);$("#mbarCount").textContent=n+(n===1?" item":" items");renderCart()}
+const STATES=["Abia","Adamawa","Akwa Ibom","Anambra","Bauchi","Bayelsa","Benue","Borno","Cross River","Delta","Ebonyi","Edo","Ekiti","Enugu","FCT (Abuja)","Gombe","Imo","Jigawa","Kaduna","Kano","Katsina","Kebbi","Kogi","Kwara","Lagos","Nasarawa","Niger","Ogun","Ondo","Osun","Oyo","Plateau","Rivers","Sokoto","Taraba","Yobe","Zamfara"];
+let draft=store.get("ot_details",{name:"",phone:"",state:"",address:"",note:""});
+let stage="cart";
+
+function renderCart(){
+  const b=$("#dBody"),f=$("#dFoot");
+  if(stage==="sent") return;
+  $("#dTitle").textContent = stage==="details"?"Delivery details":"Your cart";
+  if(!cart.length){
+    stage="cart"; $("#dTitle").textContent="Your cart";
+    b.innerHTML=`<div class="empty"><p>Your cart is empty.</p><button class="btn btn-primary" data-close data-go="shop">Browse bedding</button></div>`; f.innerHTML=""; return;
+  }
+  if(stage==="cart"){
+    b.innerHTML=cart.map((l,i)=>{const x=lineInfo(l);return `<div class="line"><img src="${IMG[x.p.imgs[0]]}" alt=""><div><div class="nm">${x.p.name}</div><div class="opt">${x.size} · ${x.color}</div><div class="qty"><button data-q="${i}" data-d="-1" aria-label="Decrease">−</button><span>${l.qty}</span><button data-q="${i}" data-d="1" aria-label="Increase">+</button></div></div><div class="lp"><button class="rm" data-rm="${i}">Remove</button></div></div>`}).join("");
+    f.innerHTML=`<div class="tot"><span>Items</span><b>${cart.reduce((s,l)=>s+l.qty,0)}</b></div><p class="small">We'll reply on WhatsApp with prices and the delivery fee for your state.</p><button class="btn btn-primary" id="toDetails">Continue to delivery details</button>`;
+    $("#toDetails").onclick=()=>{stage="details";renderCart()};
+  } else {
+    b.innerHTML=`<form class="co" id="coForm" novalidate>
+      <label for="fName">Full name<input id="fName" name="name" autocomplete="name" value="${esc(draft.name)}" required></label>
+      <label for="fPhone">Phone number<input id="fPhone" name="phone" type="tel" autocomplete="tel" placeholder="080..." value="${esc(draft.phone)}" required></label>
+      <label for="fState">State<select id="fState" name="state" required><option value="">Select your state</option>${STATES.map(s=>`<option ${draft.state===s?"selected":""}>${s}</option>`).join("")}</select></label>
+      <label for="fAddr">Delivery address<textarea id="fAddr" name="address" autocomplete="street-address" required>${esc(draft.address)}</textarea></label>
+      <label for="fNote">Note (optional)<textarea id="fNote" name="note" placeholder="Preferred delivery time, gift wrap...">${esc(draft.note)}</textarea></label>
+      <p class="err" id="fErr" hidden></p>
+    </form>`;
+    f.innerHTML=`<div class="tot"><span>Items</span><b>${cart.reduce((s,l)=>s+l.qty,0)}</b></div><button class="btn btn-wine" id="sendWa" type="button">Send order on WhatsApp</button><button class="btn btn-ghost" id="backCart" type="button">Back to cart</button>`;
+    $("#coForm").addEventListener("input",e=>{draft[e.target.name]=e.target.value;store.set("ot_details",draft)});
+    $("#coForm").addEventListener("submit",e=>{e.preventDefault();sendOrder()});
+    $("#backCart").onclick=()=>{stage="cart";renderCart()};
+    $("#sendWa").onclick=sendOrder;
+  }
+}
+function esc(s){return String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+$("#dBody").addEventListener("click",e=>{
+  const q=e.target.closest("[data-q]"),r=e.target.closest("[data-rm]");
+  if(q){const l=cart[+q.dataset.q];l.qty+=+q.dataset.d;if(l.qty<1)cart.splice(+q.dataset.q,1);saveCart()}
+  if(r){cart.splice(+r.dataset.rm,1);saveCart()}
+});
+
+function buildMessage(){
+  const lines=cart.map((l,i)=>{const x=lineInfo(l);return `${i+1}. ${x.p.name}\n   ${x.size}, ${x.color} × ${l.qty}`});
+  return `Hello OctoberTen Interiors, I'd like to place an order:\n\n${lines.join("\n")}\n\nName: ${draft.name}\nPhone: ${draft.phone}\nState: ${draft.state}\nAddress: ${draft.address}${draft.note?`\nNote: ${draft.note}`:""}\n\nPlease send me the prices, availability and delivery fee. Thank you!`;
+}
+function sendOrder(){
+  const err=$("#fErr");
+  const miss=[];
+  if(!draft.name.trim())miss.push("your name");
+  if(!/^\+?\d[\d\s-]{9,}$/.test(draft.phone.trim()))miss.push("a valid phone number");
+  if(!draft.state)miss.push("your state");
+  if(!draft.address.trim())miss.push("your delivery address");
+  if(miss.length){err.textContent="Please add "+miss.join(", ")+".";err.hidden=false;return}
+  const msg=buildMessage(), url=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+  stage="sent";
+  $("#dTitle").textContent="Finish on WhatsApp";
+  $("#dBody").innerHTML=`<p>Your order message is ready. Open WhatsApp and tap send to place it with OctoberTen Interiors.</p>
+    <a class="btn btn-wine" href="${url}" target="_blank" rel="noopener">Open WhatsApp with my order</a>
+    <p class="small">If WhatsApp doesn't open, copy the message below and send it to <b style="user-select:all">0703 220 9286</b>.</p>
+    <div class="sent" id="msgText">${esc(msg)}</div>
+    <button class="btn btn-ghost" id="copyMsg" type="button">Copy order message</button>`;
+  $("#dFoot").innerHTML=`<button class="btn btn-ghost" id="clearCart" type="button">Start a new order</button><button class="btn btn-ghost" id="editOrder" type="button">Edit order</button>`;
+  $("#copyMsg").onclick=()=>copy(msg,$("#msgText"),"Order message copied");
+  $("#clearCart").onclick=()=>{cart=[];stage="cart";saveCart()};
+  $("#editOrder").onclick=()=>{stage="cart";renderCart()};
+}
+
+function copy(text,el,done){
+  const fallback=()=>{if(!el)return;const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);toast("Selected. Copy it from your keyboard menu")};
+  try{navigator.clipboard.writeText(text).then(()=>toast(done),fallback)}catch(e){fallback()}
+}
+$("#copyPhone").onclick=()=>copy("07032209286",$("#phoneNum"),"Number copied");
+
+// overlays
+function show(sel){hideAll(true);$(sel).classList.add("on");$("#scrim").classList.add("on");if(sel==="#drawer")$("#drawer").setAttribute("aria-hidden","false");setTimeout(()=>{const f=$(sel).querySelector("button");f&&f.focus()},50)}
+function hideAll(keep){document.querySelectorAll(".modal,.drawer").forEach(x=>x.classList.remove("on"));$("#drawer").setAttribute("aria-hidden","true");if(!keep)$("#scrim").classList.remove("on")}
+$("#openCart").onclick=()=>{if(stage==="sent"&&cart.length===0)stage="cart";if(stage!=="sent")stage="cart";renderCart();show("#drawer")};
+$("#scrim").onclick=()=>hideAll();
+$("#mbarBtn").onclick=()=>$("#openCart").click();
+$("#menuBtn").onclick=()=>{const m=$("#mnav");m.hidden=!m.hidden;$("#menuBtn").setAttribute("aria-expanded",String(!m.hidden))};
+$("#mnav").addEventListener("click",e=>{if(e.target.closest("a")){$("#mnav").hidden=true;$("#menuBtn").setAttribute("aria-expanded","false")}});
+document.addEventListener("click",e=>{const c=e.target.closest("[data-close]");if(!c)return;hideAll();if(c.dataset.go)$("#"+c.dataset.go).scrollIntoView({behavior:"smooth"})});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")hideAll()});
+
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2200)}
+
+renderChips();renderGrid();saveCart();
+if(location.hash==="#cart"){renderCart();show("#drawer")}
+</script>
+
+</body>
+</html>
