@@ -466,7 +466,7 @@ const PRODUCTS = [
 const $ = s => document.querySelector(s);
 const naira = n => "₦" + n.toLocaleString("en-NG");
 const store = {get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-let cart = store.get("ot_cart",[]).filter(l=>PRODUCTS.some(p=>p.id===l.id));
+let cart = store.get("ot_cart",[]).filter(l=>{const p=PRODUCTS.find(x=>x.id===l.id);return p&&p.sizes[l.size]&&p.colors[l.color]&&l.qty>0});
 let filter = "all";
 
 $("#heroImg").src = IMG.greybed;
@@ -516,13 +516,12 @@ $("#mPlus").onclick=()=>{sel.qty=Math.min(20,sel.qty+1);renderOpts()};
 $("#mAdd").onclick=()=>{
   const key=`${cur.id}|${sel.size}|${sel.color}`, ex=cart.find(l=>l.key===key);
   if(ex) ex.qty+=sel.qty; else cart.push({key,id:cur.id,size:sel.size,color:sel.color,qty:sel.qty});
-  saveCart(); hideAll(); toast(`Added ${cur.name} to your cart`);
+  hideAll(); saveCart(); toast(`Added ${cur.name} to your cart`);
   const c=$("#count");c.classList.remove("bump");void c.offsetWidth;c.classList.add("bump");
 };
 
 // cart
-function lineInfo(l){const p=PRODUCTS.find(x=>x.id===l.id);return {p,size:p.sizes[l.size],color:p.colors[l.color],unit:p.prices[l.size],total:p.prices[l.size]*l.qty}}
-function subtotal(){return cart.reduce((s,l)=>s+lineInfo(l).total,0)}
+function lineInfo(l){const p=PRODUCTS.find(x=>x.id===l.id);return {p,size:p.sizes[l.size],color:p.colors[l.color]}}
 function saveCart(){store.set("ot_cart",cart);const n=cart.reduce((s,l)=>s+l.qty,0);$("#count").textContent=n;$("#mbar").hidden=!n;document.body.classList.toggle("has-bar",!!n);$("#mbarCount").textContent=n+(n===1?" item":" items");renderCart()}
 const STATES=["Abia","Adamawa","Akwa Ibom","Anambra","Bauchi","Bayelsa","Benue","Borno","Cross River","Delta","Ebonyi","Edo","Ekiti","Enugu","FCT (Abuja)","Gombe","Imo","Jigawa","Kaduna","Kano","Katsina","Kebbi","Kogi","Kwara","Lagos","Nasarawa","Niger","Ogun","Ondo","Osun","Oyo","Plateau","Rivers","Sokoto","Taraba","Yobe","Zamfara"];
 let draft=store.get("ot_details",{name:"",phone:"",state:"",address:"",note:""});
